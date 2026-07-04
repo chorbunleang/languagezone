@@ -169,3 +169,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:56px 0
   .foot-top{grid-template-columns:1fr 1fr;} .section{padding:62px 0;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;} .reveal{opacity:1;transform:none;}}
+/* guides grid (2-up) */
+.guides-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+a.feat{color:inherit;} a.feat:hover{text-decoration:none;}
+@media(max-width:900px){.guides-grid{grid-template-columns:1fr;}}
