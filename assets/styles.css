@@ -4,9 +4,9 @@
   --line:#EAE7F2; --purple:#5B4B9E; --purple-700:#473A80; --purple-50:#EEEBF8;
   --orange:#F5A623; --orange-600:#E0951C; --red:#D9573F;
   --pink:#EC4A8B; --teal:#15BFA3; --blue:#2F6BE0; --navy:#173A5E;
-  --disp:"Bricolage Grotesque","Kaiti SC","KaiTi","STKaiti","楷体","BiauKai",system-ui,sans-serif;
-  --body:"Plus Jakarta Sans","Kaiti SC","KaiTi","STKaiti","楷体","BiauKai",system-ui,sans-serif;
-  --kai:"Kaiti SC","KaiTi","STKaiti","楷体","BiauKai",serif;
+  --disp:"Bricolage Grotesque","LXGW WenKai","Kaiti SC","KaiTi","STKaiti","楷体","BiauKai",system-ui,sans-serif;
+  --body:"Plus Jakarta Sans","LXGW WenKai","Kaiti SC","KaiTi","STKaiti","楷体","BiauKai",system-ui,sans-serif;
+  --kai:"LXGW WenKai","Kaiti SC","KaiTi","STKaiti","楷体","BiauKai",serif;
   --r:20px; --shadow:0 10px 40px -12px rgba(40,30,80,.18); --shadow-sm:0 4px 18px -8px rgba(40,30,80,.16);
   --wrap:1160px;
 }
