@@ -29,7 +29,7 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 .check input{width:16px;height:16px;accent-color:var(--purple);}
 .print-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:13px;border-radius:12px;font-weight:700;font-size:14.5px;cursor:pointer;font-family:var(--body);}
 .print-btn:hover{background:var(--orange-600);}
-.sheet{background:var(--paper,#FBFAF6);border:1px solid var(--line);border-radius:14px;padding:26px;min-height:520px;}
+.sheet{background:var(--paper,#FBFAF6);border:1px solid var(--line);border-radius:14px;padding:26px;min-height:520px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .sheet-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:16px;}
 .sheet-title{font-family:var(--disp);font-size:20px;font-weight:800;}
 .name-line{font-size:12px;color:#4a453e;display:flex;gap:16px;}
@@ -44,6 +44,11 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 .wcell .diag{position:absolute;inset:0;opacity:.55;}
 .wg{font-family:var(--kai);line-height:1;}
 .wg.ref{color:var(--ink);} .wg.trace{color:#DAD0C4;}
+@media(max-width:600px){
+  .tool{margin:16px 0 30px;}
+  .sheet{padding:16px;min-height:auto;}
+  .tool-intro h1{font-size:26px;}
+}
 @media print{
   @page{size:A4;margin:14mm;}
   header,footer,.panel,.tool-intro,.breadcrumb,.no-print{display:none !important;}
@@ -133,6 +138,7 @@ function render(){
     for(let i=0;i<state.cols;i++){if(i===0)row.appendChild(cell(state.grid,ch,'ref'));else if(i<=state.trace)row.appendChild(cell(state.grid,ch,'trace'));else row.appendChild(cell(state.grid,'',''));}
     block.appendChild(row);wrap.appendChild(block);});
 }
+if(window.matchMedia('(max-width:600px)').matches){state.cols=8;state.size=50;document.getElementById('colsVal').textContent=8;document.querySelectorAll('#sizeSeg button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.size==='50'?'true':'false'));}
 const params=new URLSearchParams(location.search);
 if(params.get('chars')){document.getElementById('chars').value=params.get('chars');}
 document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
