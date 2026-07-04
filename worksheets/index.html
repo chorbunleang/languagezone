@@ -41,7 +41,7 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 .wcell + .wcell{border-left:none;}
 .wcell.tian::before,.wcell.mi::before{content:"";position:absolute;left:0;right:0;top:50%;height:.5px;background-image:repeating-linear-gradient(90deg,#D68b7c 0 4px,transparent 4px 8px);opacity:.55;}
 .wcell.tian::after,.wcell.mi::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:.5px;background-image:repeating-linear-gradient(180deg,#D68b7c 0 4px,transparent 4px 8px);opacity:.55;}
-.wcell .diag{position:absolute;inset:0;opacity:.4;}
+.wcell .diag{position:absolute;inset:0;opacity:.55;}
 .wg{font-family:var(--kai);line-height:1;}
 .wg.ref{color:var(--ink);} .wg.trace{color:#DAD0C4;}
 @media print{
@@ -119,7 +119,7 @@ document.querySelectorAll('.stepper').forEach(s=>{const k=s.dataset.step;s.query
 document.getElementById('chars').addEventListener('input',render);
 document.getElementById('optPinyin').addEventListener('change',e=>{state.pinyin=e.target.checked;render();});
 document.getElementById('optName').addEventListener('change',e=>{state.name=e.target.checked;render();});
-function cell(type,glyph,cls){const c=document.createElement('div');c.className='wcell '+(CLS[type]||'');if(type==='mi'){c.innerHTML='<svg class="diag" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#D68b7c" stroke-width="0.5" stroke-dasharray="4 4"/><line x1="100" y1="0" x2="0" y2="100" stroke="#D68b7c" stroke-width="0.5" stroke-dasharray="4 4"/></svg>';}if(glyph){const g=document.createElement('span');g.className='wg '+cls;g.style.fontSize=(state.size*0.72)+'px';g.textContent=glyph;c.appendChild(g);}return c;}
+function cell(type,glyph,cls){const c=document.createElement('div');c.className='wcell '+(CLS[type]||'');if(type==='mi'){c.innerHTML='<svg class="diag" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#D68b7c" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/><line x1="100" y1="0" x2="0" y2="100" stroke="#D68b7c" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg>';}if(glyph){const g=document.createElement('span');g.className='wg '+cls;g.style.fontSize=(state.size*0.72)+'px';g.textContent=glyph;c.appendChild(g);}return c;}
 function render(){
   const raw=document.getElementById('chars').value;
   const chars=[...raw].filter(ch=>/[\u3400-\u9FFF]/.test(ch));
