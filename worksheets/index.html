@@ -1,14 +1,14 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chinese Worksheet Maker — Free Printable Handwriting Practice | LanguageZone</title>
-<meta name="description" content="Free Chinese character worksheet generator. Type any characters and create a printable handwriting practice sheet with 田字格 grids, tracing, pinyin, and PDF export.">
+<meta name="description" content="Free Chinese character worksheet generator. Type any characters and create a printable handwriting practice sheet with 田字格 grids, tracing, pinyin, English meanings, numbered stroke order, and PDF export. Share any worksheet with a link.">
 <link rel="canonical" href="https://languagezone.co/worksheets/">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1/lxgwwenkai-regular.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9615128363878669" crossorigin="anonymous"></script><link rel="stylesheet" href="/assets/styles.css">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1/lxgwwenkai-regular.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9615128363878669" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script><link rel="stylesheet" href="/assets/styles.css">
 <style>
 .tool{display:grid;grid-template-columns:320px 1fr;gap:22px;margin:22px 0 40px;}
 @media(max-width:820px){.tool{grid-template-columns:1fr;}}
@@ -54,7 +54,21 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
   header,footer,.panel,.tool-intro,.breadcrumb,.no-print{display:none !important;}
   .tool{display:block;margin:0;}
   .sheet{border:none;border-radius:0;padding:0;background:#fff;} body{background:#fff;}
+  .share-field,.share-hint{display:none !important;}
 }
+.wstudy{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;margin-bottom:5px;padding-left:2px;min-height:20px;}
+.wpy2{font-size:13px;color:#6a645b;font-weight:600;}
+.wmean{font-size:12.5px;color:#8a5a2b;background:#F6EEE2;border:1px solid #EBD9BF;border-radius:6px;padding:1px 8px;}
+.wsteps{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-left:auto;}
+.wsteps .lbl{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#a49c90;margin-right:1px;}
+.wstep{width:34px;height:34px;position:relative;border:.5px solid #e6ddcf;border-radius:5px;background:#fff;}
+.wstep svg{display:block;width:100%;height:100%;}
+.wstep b{position:absolute;bottom:-1px;right:2px;font-size:8px;color:#a49c90;font-weight:700;line-height:1;}
+.sharebox{display:flex;gap:7px;margin-top:2px;}
+.sharebox input{flex:1;min-width:0;border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:12px;color:var(--purple);background:var(--canvas);font-family:var(--body);font-weight:600;}
+.share-btn{background:var(--purple);color:#fff;border:none;border-radius:9px;padding:0 14px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;font-family:var(--body);}
+.share-btn:hover{filter:brightness(1.08);}
+@media(max-width:600px){.wsteps{margin-left:0;width:100%;}.wstep{width:30px;height:30px;}}
 </style></head><body>
 
 <header><div class="wrap nav">
@@ -70,7 +84,7 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 <div class="breadcrumb"><a href="/">Home</a> › Worksheet Maker</div>
 <div class="tool-intro prose" style="margin:16px 0 0;max-width:100%;">
 <h1 style="font-size:clamp(28px,4vw,36px);">Chinese Worksheet Maker</h1>
-<p class="lead">Type any Chinese characters below and instantly build a printable handwriting practice sheet. Choose a grid style, add tracing guides, then print or save as PDF — completely free.</p>
+<p class="lead">Type any Chinese characters and instantly build a printable handwriting sheet — with pinyin, English meanings, and numbered stroke order for each character. Choose a grid style, add tracing guides, then print, save as PDF, or share your sheet with a link. Completely free.</p>
 </div>
 
 <div class="tool">
@@ -94,7 +108,12 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 <button data-size="70" aria-pressed="false">L</button></div></div>
 <div class="field"><label class="lb">Options</label>
 <label class="check"><input type="checkbox" id="optPinyin" checked> Show pinyin line</label>
+<label class="check"><input type="checkbox" id="optMean" checked> Show English meaning</label>
+<label class="check"><input type="checkbox" id="optStroke" checked> Show stroke order</label>
 <label class="check"><input type="checkbox" id="optName" checked> Name / date header</label></div>
+<div class="field share-field"><label class="lb">Share this worksheet</label>
+<div class="sharebox"><input id="shareUrl" readonly onclick="this.select()"><button class="share-btn" onclick="copyShare()">Copy</button></div>
+<p class="share-hint" style="font-size:11px;color:var(--muted);margin-top:7px;">Anyone who opens this link gets this exact sheet — great for sharing with friends or students.</p></div>
 <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
 <p style="font-size:11.5px;color:var(--muted);margin-top:10px;">Pinyin is filled for common characters. Choose "Save as PDF" in the print dialog to keep a copy.</p>
 </aside>
@@ -116,14 +135,77 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 
 <script>
 const PY={"你":"nǐ","好":"hǎo","我":"wǒ","是":"shì","他":"tā","她":"tā","们":"men","的":"de","不":"bù","了":"le","在":"zài","有":"yǒu","这":"zhè","那":"nà","中":"zhōng","国":"guó","人":"rén","大":"dà","小":"xiǎo","上":"shàng","下":"xià","学":"xué","习":"xí","文":"wén","字":"zì","写":"xiě","读":"dú","说":"shuō","听":"tīng","看":"kàn","家":"jiā","爱":"ài","天":"tiān","日":"rì","月":"yuè","年":"nián","水":"shuǐ","火":"huǒ","山":"shān","口":"kǒu","手":"shǒu","目":"mù","一":"yī","二":"èr","三":"sān","四":"sì","五":"wǔ","六":"liù","七":"qī","八":"bā","九":"jiǔ","十":"shí","百":"bǎi","千":"qiān","爸":"bà","妈":"mā","哥":"gē","姐":"jiě","弟":"dì","妹":"mèi","爷":"yé","奶":"nǎi","儿":"ér","女":"nǚ","生":"shēng","去":"qù","来":"lái","世":"shì","界":"jiè"};
-const state={grid:"tian",trace:3,cols:10,size:58,pinyin:true,name:true};
+const EN={"你":"you","好":"good","我":"I, me","是":"to be","他":"he","她":"she","们":"(plural)","的":"(possessive)","不":"not","了":"(particle)","在":"at, in","有":"to have","这":"this","那":"that","中":"middle, China","国":"country","人":"person","大":"big","小":"small","上":"up, above","下":"down, below","学":"to study","习":"to practice","文":"language","字":"character","写":"to write","读":"to read","说":"to speak","听":"to listen","看":"to look","家":"home, family","爱":"to love","天":"sky, day","日":"sun, day","月":"moon, month","年":"year","水":"water","火":"fire","山":"mountain","口":"mouth","手":"hand","目":"eye","一":"one","二":"two","三":"three","四":"four","五":"five","六":"six","七":"seven","八":"eight","九":"nine","十":"ten","百":"hundred","千":"thousand","爸":"dad","妈":"mom","哥":"older brother","姐":"older sister","弟":"younger brother","妹":"younger sister","爷":"grandpa","奶":"grandma","儿":"child, son","女":"female","生":"to be born; life","去":"to go","来":"to come","世":"world, era","界":"boundary, field"};
+const state={grid:"tian",trace:3,cols:10,size:58,pinyin:true,mean:true,stroke:true,name:true};
 const CLS={tian:"tian",mi:"mi",blank:""};
 document.querySelectorAll('#gridSeg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#gridSeg button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');state.grid=b.dataset.grid;render();}));
 document.querySelectorAll('#sizeSeg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#sizeSeg button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');state.size=Number(b.dataset.size);render();}));
 document.querySelectorAll('.stepper').forEach(s=>{const k=s.dataset.step;s.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{const d=Number(b.dataset.d);if(k==='trace')state.trace=Math.max(0,Math.min(6,state.trace+d));if(k==='cols')state.cols=Math.max(4,Math.min(16,state.cols+d));document.getElementById('traceVal').textContent=state.trace;document.getElementById('colsVal').textContent=state.cols;render();}));});
 document.getElementById('chars').addEventListener('input',render);
 document.getElementById('optPinyin').addEventListener('change',e=>{state.pinyin=e.target.checked;render();});
+document.getElementById('optMean').addEventListener('change',e=>{state.mean=e.target.checked;render();});
+document.getElementById('optStroke').addEventListener('change',e=>{state.stroke=e.target.checked;render();});
 document.getElementById('optName').addEventListener('change',e=>{state.name=e.target.checked;render();});
+const SC={};
+function stepsSVG(strokes){
+  const n=strokes.length;let html='';
+  for(let k=1;k<=n;k++){
+    let paths='';
+    for(let s=0;s<n;s++){
+      const col=(s===k-1)?'#E9407C':(s<k-1?'#2A2540':'#E3DAF2');
+      paths+='<path d="'+strokes[s]+'" fill="'+col+'"/>';
+    }
+    html+='<div class="wstep"><svg viewBox="0 0 1024 1024"><g transform="translate(0,900) scale(1,-1)">'+paths+'</g></svg><b>'+k+'</b></div>';
+  }
+  return html;
+}
+function fillSteps(el,ch){
+  if(SC[ch]){el.innerHTML='<span class="lbl">stroke order</span>'+SC[ch];return;}
+  if(typeof HanziWriter==='undefined'||!HanziWriter.loadCharacterData)return;
+  HanziWriter.loadCharacterData(ch).then(function(d){
+    if(!d||!d.strokes)return;
+    SC[ch]=stepsSVG(d.strokes);
+    el.innerHTML='<span class="lbl">stroke order</span>'+SC[ch];
+  }).catch(function(){});
+}
+function encodeShare(){
+  const g={tian:'t',mi:'m',blank:'b'}[state.grid]||'t';
+  const flags=(state.pinyin?1:0)|(state.mean?2:0)|(state.stroke?4:0)|(state.name?8:0);
+  const payload=g+state.cols+','+state.trace+','+state.size+','+flags+'|'+document.getElementById('chars').value;
+  return btoa(unescape(encodeURIComponent(payload))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function decodeShare(code){
+  try{
+    const payload=decodeURIComponent(escape(atob(code.replace(/-/g,'+').replace(/_/g,'/'))));
+    const bar=payload.indexOf('|');if(bar<0)return null;
+    const cfg=payload.slice(0,bar),chars=payload.slice(bar+1),parts=cfg.slice(1).split(',');
+    return {grid:{t:'tian',m:'mi',b:'blank'}[cfg[0]]||'tian',cols:+parts[0],trace:+parts[1],size:+parts[2],flags:+parts[3],chars:chars};
+  }catch(e){return null;}
+}
+function updateShare(){
+  const base=(location.origin&&location.origin.indexOf('http')===0)?location.origin+location.pathname:'https://languagezone.co/worksheets/';
+  const f=document.getElementById('shareUrl');if(f)f.value=base+'?w='+encodeShare();
+}
+function copyShare(){
+  const f=document.getElementById('shareUrl');
+  navigator.clipboard.writeText(f.value).then(function(){var b=document.querySelector('.share-btn'),t=b.textContent;b.textContent='Copied!';setTimeout(function(){b.textContent=t;},1600);}).catch(function(){f.select();});
+}
+function applyShared(d){
+  document.getElementById('chars').value=d.chars;
+  state.grid=d.grid;
+  state.cols=Math.max(4,Math.min(16,d.cols||10));
+  state.trace=Math.max(0,Math.min(6,isNaN(d.trace)?3:d.trace));
+  state.size=[50,58,70].indexOf(d.size)>=0?d.size:58;
+  state.pinyin=!!(d.flags&1);state.mean=!!(d.flags&2);state.stroke=!!(d.flags&4);state.name=!!(d.flags&8);
+  document.querySelectorAll('#gridSeg button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.grid===state.grid?'true':'false'));
+  document.querySelectorAll('#sizeSeg button').forEach(x=>x.setAttribute('aria-pressed',(+x.dataset.size)===state.size?'true':'false'));
+  document.getElementById('colsVal').textContent=state.cols;
+  document.getElementById('traceVal').textContent=state.trace;
+  document.getElementById('optPinyin').checked=state.pinyin;
+  document.getElementById('optMean').checked=state.mean;
+  document.getElementById('optStroke').checked=state.stroke;
+  document.getElementById('optName').checked=state.name;
+}
 function cell(type,glyph,cls){const c=document.createElement('div');c.className='wcell '+(CLS[type]||'');if(type==='mi'){c.innerHTML='<svg class="diag" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#D68b7c" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/><line x1="100" y1="0" x2="0" y2="100" stroke="#D68b7c" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg>';}if(glyph){const g=document.createElement('span');g.className='wg '+cls;g.style.fontSize=(state.size*0.72)+'px';g.textContent=glyph;c.appendChild(g);}return c;}
 function render(){
   const raw=document.getElementById('chars').value;
@@ -133,14 +215,20 @@ function render(){
   const wrap=document.getElementById('grids');wrap.innerHTML='';
   if(!chars.length){wrap.innerHTML='<p style="color:#a49c90;text-align:center;padding:30px 0;">Type Chinese characters to build your worksheet.</p>';return;}
   chars.forEach(ch=>{const block=document.createElement('div');block.className='charblock';
-    if(state.pinyin){const p=document.createElement('div');p.className='wpy';p.textContent=PY[ch]||'';block.appendChild(p);}
+    if(state.pinyin||state.mean||state.stroke){const st=document.createElement('div');st.className='wstudy';
+      if(state.pinyin){const p=document.createElement('span');p.className='wpy2';p.textContent=PY[ch]||'';st.appendChild(p);}
+      if(state.mean){const m=document.createElement('span');m.className='wmean';m.textContent=EN[ch]||'—';st.appendChild(m);}
+      if(state.stroke){const s=document.createElement('div');s.className='wsteps';s.innerHTML='<span class="lbl">stroke order</span>';fillSteps(s,ch);st.appendChild(s);}
+      block.appendChild(st);}
     const row=document.createElement('div');row.className='wcells';
     for(let i=0;i<state.cols;i++){if(i===0)row.appendChild(cell(state.grid,ch,'ref'));else if(i<=state.trace)row.appendChild(cell(state.grid,ch,'trace'));else row.appendChild(cell(state.grid,'',''));}
     block.appendChild(row);wrap.appendChild(block);});
+  updateShare();
 }
 if(window.matchMedia('(max-width:600px)').matches){state.cols=8;state.size=50;document.getElementById('colsVal').textContent=8;document.querySelectorAll('#sizeSeg button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.size==='50'?'true':'false'));}
 const params=new URLSearchParams(location.search);
-if(params.get('chars')){document.getElementById('chars').value=params.get('chars');}
+if(params.get('w')){const d=decodeShare(params.get('w'));if(d)applyShared(d);}
+else if(params.get('chars')){document.getElementById('chars').value=params.get('chars');}
 document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
 render();
 </script></body></html>
