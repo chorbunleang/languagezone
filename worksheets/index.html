@@ -100,11 +100,11 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 <div class="field"><label class="lb">Tracing</label>
 <div class="stepper" data-step="trace"><button data-d="-1">−</button><span id="traceVal">3</span><button data-d="1">+</button></div></div>
 <div class="field"><label class="lb">Per row</label>
-<div class="stepper" data-step="cols"><button data-d="-1">−</button><span id="colsVal">10</span><button data-d="1">+</button></div></div></div>
+<div class="stepper" data-step="cols"><button data-d="-1">−</button><span id="colsVal">15</span><button data-d="1">+</button></div></div></div>
 <div class="field"><label class="lb">Cell size</label>
 <div class="seg" id="sizeSeg">
-<button data-size="50" aria-pressed="false">S</button>
-<button data-size="58" aria-pressed="true">M</button>
+<button data-size="50" aria-pressed="true">S</button>
+<button data-size="58" aria-pressed="false">M</button>
 <button data-size="70" aria-pressed="false">L</button></div></div>
 <div class="field"><label class="lb">Options</label>
 <label class="check"><input type="checkbox" id="optPinyin" checked> Show pinyin line</label>
@@ -136,7 +136,7 @@ textarea#chars:focus{outline:2px solid var(--purple);border-color:transparent;}
 <script>
 const PY={"你":"nǐ","好":"hǎo","我":"wǒ","是":"shì","他":"tā","她":"tā","们":"men","的":"de","不":"bù","了":"le","在":"zài","有":"yǒu","这":"zhè","那":"nà","中":"zhōng","国":"guó","人":"rén","大":"dà","小":"xiǎo","上":"shàng","下":"xià","学":"xué","习":"xí","文":"wén","字":"zì","写":"xiě","读":"dú","说":"shuō","听":"tīng","看":"kàn","家":"jiā","爱":"ài","天":"tiān","日":"rì","月":"yuè","年":"nián","水":"shuǐ","火":"huǒ","山":"shān","口":"kǒu","手":"shǒu","目":"mù","一":"yī","二":"èr","三":"sān","四":"sì","五":"wǔ","六":"liù","七":"qī","八":"bā","九":"jiǔ","十":"shí","百":"bǎi","千":"qiān","爸":"bà","妈":"mā","哥":"gē","姐":"jiě","弟":"dì","妹":"mèi","爷":"yé","奶":"nǎi","儿":"ér","女":"nǚ","生":"shēng","去":"qù","来":"lái","世":"shì","界":"jiè"};
 const EN={"你":"you","好":"good","我":"I, me","是":"to be","他":"he","她":"she","们":"(plural)","的":"(possessive)","不":"not","了":"(particle)","在":"at, in","有":"to have","这":"this","那":"that","中":"middle, China","国":"country","人":"person","大":"big","小":"small","上":"up, above","下":"down, below","学":"to study","习":"to practice","文":"language","字":"character","写":"to write","读":"to read","说":"to speak","听":"to listen","看":"to look","家":"home, family","爱":"to love","天":"sky, day","日":"sun, day","月":"moon, month","年":"year","水":"water","火":"fire","山":"mountain","口":"mouth","手":"hand","目":"eye","一":"one","二":"two","三":"three","四":"four","五":"five","六":"six","七":"seven","八":"eight","九":"nine","十":"ten","百":"hundred","千":"thousand","爸":"dad","妈":"mom","哥":"older brother","姐":"older sister","弟":"younger brother","妹":"younger sister","爷":"grandpa","奶":"grandma","儿":"child, son","女":"female","生":"to be born; life","去":"to go","来":"to come","世":"world, era","界":"boundary, field"};
-const state={grid:"tian",trace:3,cols:10,size:58,pinyin:true,mean:true,stroke:true,name:true};
+const state={grid:"tian",trace:3,cols:15,size:50,pinyin:true,mean:true,stroke:true,name:true};
 const CLS={tian:"tian",mi:"mi",blank:""};
 document.querySelectorAll('#gridSeg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#gridSeg button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');state.grid=b.dataset.grid;render();}));
 document.querySelectorAll('#sizeSeg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#sizeSeg button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');state.size=Number(b.dataset.size);render();}));
